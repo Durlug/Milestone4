@@ -18,21 +18,20 @@ namespace ict
 		return delivery_;
 	}
 
-	void CustomMade::delivery(const Date &value)
+	void CustomMade::delivery(const Date& value)
 	{
 		delivery_ = value;
 	}
 
-	std::fstream& CustomMade::store(std::fstream& file, bool linear)
+	std::fstream& CustomMade::store(std::fstream& file, bool addNewLine) const
 	{
 		OnShelf::store(file, false);
-		if (linear == true)
+		file << ",";
+		delivery_.write(file);
+
+		if (addNewLine)
 		{
-			file << ',' << delivery_ << std::endl;
-		}
-		else
-		{
-			file << ',' << delivery_;
+			file << std::endl;
 		}
 		return file;
 	}
@@ -45,33 +44,32 @@ namespace ict
 		return file;
 	}
 
-	std::ostream& CustomMade::display(std::ostream& ostr, bool linear)
+	std::ostream& CustomMade::display(std::ostream& os, bool linear) const
 	{
-		OnShelf::display(ostr, linear);
+		OnShelf::display(os, linear);
 		if (err_.isClear()) 
 		{
-			if (linear == true)
+			if (linear)
 			{
-				ostr << delivery_;
+				os << delivery();
 			}
 			else
 			{
-				ostr << std::endl << "Delivery Date: " << delivery_;
+				os << std::endl << "Delivery Date: " << delivery();
 			}
-			return ostr;
-
 		}
+		return os;
 	}
 
-	std::istream& CustomMade::conInput(std::istream& istr)
+	std::istream& CustomMade::conInput(std::istream& is)
 	{
 		Date temp;
-		OnShelf::conInput(istr);
+		OnShelf::conInput(is);
 
 		if (err_.isClear())
 		{
 			std::cout << "Delivery Date (YYYY/MM/DD):";
-			istr >> temp;
+			is >> temp;
 
 			if (temp.bad())
 			{
@@ -91,17 +89,13 @@ namespace ict
 				{
 					err_.message("Invalid Day in Date Entry");
 				}
-				istr.setstate(std::ios::failbit);
+				is.setstate(std::ios::failbit);
 			}
-
+			else
+			{
+				delivery(temp);
+			}
 		}
-		else
-		{
-			delivery(temp);
-		}
-		return istr;
+		return is;
 	}
-
-
-
 }

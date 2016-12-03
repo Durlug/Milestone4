@@ -193,16 +193,14 @@ namespace ict {
 	}
 
 	//Non-member IO operator overloads
-	std::ostream& operator<<(ostream& os, Good& other)
+	std::ostream& operator<<(ostream& os, const ict::Good& other)
 	{
-		other.display(os, true);
-		return os;
+		return other.display(os, true);
 	}
 
-	std::istream& operator>>(istream& is, Good& other)
+	std::istream& operator>>(istream& is, ict::Good& other)
 	{
-		other.conInput(is);
-		return is;
+		return other.conInput(is);
 	}
 
 }

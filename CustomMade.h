@@ -10,6 +10,7 @@
 #include "OnShelf.h"
 #include "Date.h"
 #include "Error.h"
+
 namespace ict {
    class CustomMade :public OnShelf{
    private:
@@ -18,10 +19,10 @@ namespace ict {
 	   CustomMade();
 	   const Date& delivery() const;
        void delivery(const Date &value);
-	   std::fstream& store(std::fstream& file, bool linear = true);
+	   std::fstream& store(std::fstream& file, bool addNewLine = true) const;
 	   std::fstream& load(std::fstream& file);
-	   std::ostream& display(std::ostream& ostr, bool linear);
-	   std::istream& conInput(std::istream& istr);
+	   std::ostream& display(std::ostream& os, bool linear) const;
+	   std::istream& conInput(std::istream& is);
    };
 }
 

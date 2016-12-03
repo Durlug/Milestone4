@@ -62,7 +62,7 @@ namespace ict
 		double operator+=(double& good, const Good& other);
 
 		//Non-member IO operator overloads
-		std::ostream& operator <<(std::ostream& os, Good& other);
+		std::ostream& operator <<(std::ostream& os, const Good& other);
 		std::istream& operator >>(std::istream& is, Good& other);
 }
 

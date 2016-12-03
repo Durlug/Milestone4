@@ -50,14 +50,14 @@ namespace ict {
 
       // IO member functions
 	   std::istream& read(std::istream& istr);
-	   std::ostream& write(std::ostream& ostr);
+	   std::ostream& write(std::ostream& ostr)const;
       // public member functions and getters
       int mdays()const;
 	  int errCode() const;
 	  bool bad() const;
    };
    // operator << and >> overloads prototypes for ostream and istream go here
-   std::ostream& operator << (std::ostream& os, Date& other);
+   std::ostream& operator << (std::ostream& os, const Date& other);
    std::istream& operator >> (std::istream& is, Date& other);
 }
 #endif

@@ -84,7 +84,7 @@ namespace ict
 			os << err_.message();
 			return os;
 		}
-		else if (err_.isClear() == true && linear == true)
+		else if (linear)
 		{
 			os << setfill(' ') << left << setw(MAX_SKU_LEN) << sku() << "|"
 			   << setw(20) << name() << "|"
@@ -98,9 +98,9 @@ namespace ict
 				os << "   |";
 			}
 			os << setw(4) << quantity() << '|'
-			   << setw(4) << qtyNeeded() << '|' << endl;
+			   << setw(4) << qtyNeeded() << '|';
 		}
-		else if (err_.isClear() == true && linear == false)
+		else
 		{
 			os << "Sku: " << sku() << endl;
 			os << "Name: " << name() << endl;
@@ -115,7 +115,7 @@ namespace ict
 			}
 			
 			os << "Quantity on Hand: " << quantity() << endl;
-			os << "Quantity Needed: " << qtyNeeded() << endl;
+			os << "Quantity Needed: " << qtyNeeded();
 		}
 		return os;
 	}

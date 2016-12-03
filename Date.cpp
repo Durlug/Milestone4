@@ -160,7 +160,7 @@ namespace ict
 	   return istr;
    }
 
-   std::ostream& Date::write(std::ostream& ostr)
+   std::ostream& Date::write(std::ostream& ostr) const
    {
 	   ostr << year_ << "/" << std::setw(2) << std::setfill ('0') << std::right;
 	   ostr << mon_ << "/" << std::setw(2) << std::setfill('0') << std::right;
@@ -171,18 +171,14 @@ namespace ict
 
 
    // non-memeber operator overloads
-   std::ostream& operator << (std::ostream& os, Date& other)
+   std::ostream& operator << (std::ostream& os, const Date& other)
    {
-	   other.write(os);
-
-	   return os;
-	}
+	   return other.write(os);
+   }
 
    std::istream& operator >> (std::istream& is, Date& other) 
    {
-	   other.read(is);
-
-	   return is;
+	   return other.read(is);
    }
 
 }
